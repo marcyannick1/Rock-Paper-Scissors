@@ -1,0 +1,41 @@
+*{
+    margin: 0;
+    padding: 0;
+    text-align: center;
+    animation: opacity 0.5s;
+    font-family: sans-serif;
+}
+.hidden{
+    display: none;
+}
+.container{
+    display: flex;
+    align-items: center;
+}
+.player, .computer{
+    width: 50%;
+}
+.icon-container{
+    height: 100px;
+}
+.icon{
+    font-size: 4em;
+}
+.icons{
+    width: max-content;
+    margin: auto;
+}
+.icons .icon{
+    cursor: pointer;
+}
+
+
+@keyframes opacity{
+    from{
+        opacity: 0;
+    }
+    to{
+        opacity: 1;
+    }
+}
+
