@@ -96,7 +96,7 @@ h1{
 /* MEDIA QUERIES */
 @media screen and (max-width: 425px) {
     * :not(h1){
-        font-size: 1em !important;
+        font-size: 1em;
     }
     .icon{
         font-size: 3em;
