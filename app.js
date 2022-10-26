@@ -1,15 +1,24 @@
-let icons = document.querySelectorAll('.icons .icon')
+const rock = document.querySelector('.icons .rock')
+const paper = document.querySelector('.icons .paper')
+const scisors = document.querySelector('.icons .scisors')
 
-let playerIcons = document.querySelectorAll('.player .icon')
-let computerIcons = document.querySelectorAll('.computer .icon')
+const playerIcons = document.querySelectorAll('.player .icon')
+const computerIcons = document.querySelectorAll('.computer .icon')
+
+const playerScore = document.querySelector('.player .score')
+const computerScore = document.querySelector('.computer .score')
+
+const result = document.querySelector('.result')
+
+const overlay = document.querySelector(".overlay")
+const modal = document.querySelector(".modal")
+const modalBtn = document.querySelector(".modal button")
+const modalText = document.querySelector(".modal p")
+
+const overlay_modal = [overlay, modal]
 
 let playerChoice = 0;
 let computerChoice = 0;
-
-let playerScore = document.querySelector('.player .score')
-let computerScore = document.querySelector('.computer .score')
-
-let result = document.querySelector('.result')
 
 function showPlayerIcon(){
     playerIcons.forEach(icon=>{
@@ -25,66 +34,86 @@ function showComputericon(){
     })
 }
 
-icons.forEach(icon=>{
-    if(icon.classList.contains('rock')){
-        icon.addEventListener('click',()=>{
-            playerChoice = 0
-            showPlayerIcon()
-            computerChoice = Math.floor(Math.random() * 3)
-            showComputericon()
-            switch(computerChoice){
-                case 0:
-                    result.innerHTML = "It's a tie"
-                    break;
-                case 1:
-                    result.innerHTML = "You lost"
-                    computerScore.innerHTML = parseInt(computerScore.innerHTML) + 1
-                    break;
-                case 2:
-                    result.innerHTML = "You won"
-                    playerScore.innerHTML = parseInt(playerScore.innerHTML) + 1
-                    break;
-            }
+function endGame() {
+    return playerScore.textContent == 5 || computerScore.textContent == 5
+}
+
+modalBtn.addEventListener('click', ()=>{
+    document.location.reload(true)
+})
+
+rock.addEventListener('click', ()=>{
+    playerChoice = 0
+    showPlayerIcon()
+    computerChoice = Math.floor(Math.random() * 3)
+    showComputericon()
+    switch(computerChoice){
+        case 0:
+            result.textContent = "It's a tie"
+            break;
+        case 1:
+            result.textContent = "You lost"
+            computerScore.textContent = parseInt(computerScore.textContent) + 1
+            break;
+        case 2:
+            result.textContent = "You won"
+            playerScore.textContent = parseInt(playerScore.textContent) + 1
+            break;
+    }
+    if (endGame()) {
+        overlay_modal.forEach(element =>{
+            element.classList.remove('hidden')
         })
-    }else if(icon.classList.contains('paper')){
-        icon.addEventListener('click',()=>{
-            playerChoice = 1   
-            showPlayerIcon()
-            computerChoice = Math.floor(Math.random() * 3)
-            showComputericon()
-            switch(computerChoice){
-                case 0:
-                    result.innerHTML = "You won"
-                    playerScore.innerHTML = parseInt(playerScore.innerHTML) + 1
-                    break;
-                case 1:
-                    result.innerHTML = "It's a tie"
-                    break;
-                case 2:
-                    result.innerHTML = "You lost"
-                    computerScore.innerHTML = parseInt(computerScore.innerHTML) + 1
-                    break;   
-            }
+        playerScore.textContent == 5 ? modalText.textContent = "You won the game!" : modalText.textContent = "You lost the game!"
+    }
+})
+paper.addEventListener('click', ()=>{
+    playerChoice = 1
+    showPlayerIcon()
+    computerChoice = Math.floor(Math.random() * 3)
+    showComputericon()
+    switch(computerChoice){
+        case 0:
+            result.textContent = "You won"
+            playerScore.textContent = parseInt(playerScore.textContent) + 1
+            break;
+        case 1:
+            result.textContent = "It's a tie"
+            break;
+        case 2:
+            result.textContent = "You lost"
+            computerScore.textContent = parseInt(computerScore.textContent) + 1
+            break;   
+    }
+    if (endGame()) {
+        overlay_modal.forEach(element =>{
+            element.classList.remove('hidden')
         })
-    }else{
-        icon.addEventListener('click',()=>{
-            playerChoice = 2
-            showPlayerIcon()
-            computerChoice = Math.floor(Math.random() * 3)
-            showComputericon()
-            switch(computerChoice){
-                case 0:
-                    result.innerHTML = "You lost"
-                    computerScore.innerHTML = parseInt(computerScore.innerHTML) + 1
-                    break;
-                case 1:
-                    result.innerHTML = "You won"
-                    playerScore.innerHTML = parseInt(playerScore.innerHTML) + 1
-                    break;
-                case 2:
-                    result.innerHTML = "It's a tie"
-                    break;
-            }
+        playerScore.textContent == 5 ? modalText.textContent = "You won the game!" : modalText.textContent = "You lost the game!"
+    }
+})
+scisors.addEventListener('click', ()=>{
+    playerChoice = 2
+    showPlayerIcon()
+    computerChoice = Math.floor(Math.random() * 3)
+    showComputericon()
+    switch(computerChoice){
+        case 0:
+            result.textContent = "You lost"
+            computerScore.textContent = parseInt(computerScore.textContent) + 1
+            break;
+        case 1:
+            result.textContent = "You won"
+            playerScore.textContent = parseInt(playerScore.textContent) + 1
+            break;
+        case 2:
+            result.textContent = "It's a tie"
+            break;
+    }
+    if (endGame()) {
+        overlay_modal.forEach(element =>{
+            element.classList.remove('hidden')
         })
+        playerScore.textContent == 5 ? modalText.textContent = "You won the game!" : modalText.textContent = "You lost the game!"
     }
 })
